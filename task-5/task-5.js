@@ -9,13 +9,31 @@
 // Однако, если он делится без остатка на 400, это високосный год. 
 // Таким образом, 2000 г. является особым високосным годом, 
 // который бывает лишь раз в 400 лет.
+let checkDate;
+let yearEntered = parseInt(prompt("Введите год", new Date().getFullYear()));
+let monthEntered = parseInt(prompt("Введите месяц в числовом форме", new Date().getMonth() + 1));
+let dayEntered = parseInt(prompt("Введите день месяца", new Date().getDay() + 1));
 
-let yearLeapEntered = parseInt(prompt("Введите год", 2021));
-let yearLeap4Repeat = (yearLeapEntered % 4 < 1 ? true : false) && (yearLeapEntered < 4 ? false : true);
-let yearLeap400Repeat = (yearLeapEntered % 400 < 1 ? true : false);
-let yearLeap100Repeat = (yearLeapEntered % 100 < 1 ? false : true);
+let yearDevide4 = (yearEntered % 4 < 1 ? true : false) && (yearEntered < 4 ? false : true);
+let yearDevide400 = (yearEntered % 400 < 1 ? true : false);
+let yearNoDevide100 = (yearEntered % 100 != 0 ? true : false);
+let yearLeap =  (yearDevide4 || yearDevide400) && (yearNoDevide100 || yearDevide400);
 
+let monthDayMax;
+if (monthEntered == 4 ||
+    monthEntered == 6 ||
+    monthEntered == 9 ||
+    monthEntered == 11) monthDayMax = 30;
+else if (monthEntered == 2 && yearLeap) monthDayMax = 29;
+else if (monthEntered == 2 && !yearLeap) monthDayMax = 28;
+else monthDayMax = 31;
 
-let yearLeap =  (yearLeap4Repeat && yearLeap100Repeat) || !(yearLeap400Repeat && yearLeap100Repeat);
-
-alert(yearLeap4Repeat);
+let printDateZeroDay = dayEntered < 10 ? "0" : "";
+let printDateZeroMonth = monthEntered < 10 ? "0" : "";
+if (yearEntered < 1 ||
+    (monthEntered < 1 || monthEntered > 12) ||
+    (dayEntered < 1 || dayEntered > monthDayMax))  {
+    checkDate = printDateZeroDay+dayEntered+"."+printDateZeroMonth+monthEntered+"."+yearEntered+" такой даты не существует.";
+}
+else checkDate = printDateZeroDay+dayEntered+"."+printDateZeroMonth+monthEntered +"."+yearEntered+" такая дата существует.";
+alert(checkDate);
