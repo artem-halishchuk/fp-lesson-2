@@ -15,4 +15,4 @@ resultX1print = Math.round(resultX1*100)/100;
 resultX2print = Math.round(resultX2*100)/100;
 if (resultX1 && resultX2) alert("Неизвестное x1 = "+resultX1print+" ,\n"+
                                 "неизвестное x2 = "+resultX2print);
-else alert("Уровнение не имеет решения.");
+else alert("Уравнение не имеет решения.");
